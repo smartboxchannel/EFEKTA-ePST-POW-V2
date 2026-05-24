@@ -1,0 +1,337 @@
+{
+  "name": "EFEKTA_ePST_POW V2",
+  "manufacturer": "EfektaLab",
+  "model": "EFEKTA_ePST_POW_V2_E_LR",
+  "manufacturerIds": [
+    "EfektaLab"
+  ],
+  "modelIds": [
+    "EFEKTA_ePST_POW_V2_E_LR"
+  ],
+  "catalogId": 0,
+  "template": [
+    "/_Battery/BatteryPercentageRemaining.json"
+  ],
+  "init": [
+    {
+      "zcl": [
+        {
+          "endpoint": 1,
+          "cluster": "0403_PressureMeasurement",
+          "attribute": "0210_Custom",
+          "zclDataType": "SIGNED_16_BIT_INTEGER"
+        },
+        {
+          "endpoint": 2,
+          "cluster": "0402_TemperatureMeasurement",
+          "attribute": "0210_Custom",
+          "zclDataType": "SIGNED_16_BIT_INTEGER"
+        },
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0201_Custom",
+          "zclDataType": "UNSIGNED_16_BIT_INTEGER"
+        },
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0236_Custom",
+          "zclDataType": "SIGNED_8_BIT_INTEGER"
+        },
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0205_Custom",
+          "zclDataType": "BOOLEAN"
+        },
+		{
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "F004_Custom",
+          "zclDataType": "UNSIGNED_8_BIT_INTEGER"
+        },
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "F004_Custom",
+          "zclDataType": "UNSIGNED_8_BIT_INTEGER"
+        },
+        {
+          "endpoint": 1,
+          "cluster": "0403_PressureMeasurement",
+          "attribute": "0280_Custom",
+          "zclDataType": "UNSIGNED_8_BIT_INTEGER"
+        }
+      ]
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0403_PressureMeasurement",
+          "attribute": "0000_MeasuredValue"
+        }
+      ],
+      "bind": false,
+      "report": false
+    },
+    {
+      "link": [
+        {
+          "endpoint": 2,
+          "cluster": "0402_TemperatureMeasurement",
+          "attribute": "0000_MeasuredValue"
+        }
+      ],
+      "bind": false,
+      "report": false
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "000A_Time",
+          "attribute": "0007_LocalTime"
+        }
+      ],
+      "bind": false,
+      "report": false
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0000_MainsVoltage"
+        }
+      ],
+      "bind": false,
+      "report": false
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0001_MainsFrequency"
+        }
+      ],
+      "bind": false,
+      "report": false
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0021_BatteryPercentageRemaining"
+        }
+      ],
+      "bind": false,
+      "report": false
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "003E_BatteryAlarmState"
+        }
+      ],
+      "bind": false,
+      "report": false
+    }
+  ],
+  "services": [
+    {
+      "name": "Датчик давления воды",
+      "type": "C_AtmosphericPressureSensor",
+      "characteristics": [
+        {
+          "type": "C_CurrentAtmosphericPressure",
+          "unit": "Bar",
+          "minStep": 0.01,
+          "maxValue": 10,
+          "link": [
+            {
+              "type": "Double",
+              "endpoint": 1,
+              "cluster": "0403_PressureMeasurement",
+              "attribute": "0000_MeasuredValue",
+              "inFunc": "value*0.001333"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TemperatureSensor",
+      "characteristics": [
+        {
+          "type": "CurrentTemperature",
+          "link": [
+            {
+              "endpoint": 2,
+              "cluster": "0402_TemperatureMeasurement",
+              "attribute": "0000_MeasuredValue"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "options": [
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0201_Custom"
+        }
+      ],
+      "name": "Интервал чтения сенсоров, в секундах",
+      "type": "Integer",
+      "unit": "сек.",
+      "value": 30,
+      "minValue": 10,
+      "maxValue": 3600,
+      "minStep": 1
+    },
+	{
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0403_PressureMeasurement",
+          "attribute": "0280_Custom"
+        }
+      ],
+      "name": "Тип секнсора давления",
+      "description": "Диапазон измеряемого давления",
+      "type": "Integer",
+      "value": 10,
+      "values": [
+        {
+          "value": 5,
+          "name": "0-5bar"
+        },
+        {
+          "value": 10,
+          "name": "0-10bar"
+        }
+      ]
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0403_PressureMeasurement",
+          "attribute": "0210_Custom"
+        }
+      ],
+      "name": "Корректировка давления",
+      "type": "Integer",
+      "unit": "hPa",
+      "value": 0,
+      "minValue": -1000,
+      "maxValue": 1000,
+      "minStep": 1
+    },
+    {
+      "link": [
+        {
+          "endpoint": 2,
+          "cluster": "0402_TemperatureMeasurement",
+          "attribute": "0210_Custom"
+        }
+      ],
+      "name": "Корректировка температуры встроенного сенсора",
+      "description": "Единица равна корректировке в 0.1°C.",
+      "unit": "°C",
+      "type": "Integer",
+      "value": 1,
+      "minValue": -250,
+      "maxValue": 250
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0236_Custom"
+        }
+      ],
+      "name": "Мощность радио передатчика",
+      "description": "Чем выше мощность, тем выше энергопотребление, на максимальной мощности в 19dbm, потребление 100mA при передаче, при мощности 4dbm потребление 50mA",
+      "type": "Integer",
+      "value": 19,
+      "values": [
+        {
+          "value": 4,
+          "name": "4dbm"
+        },
+        {
+          "value": 19,
+          "name": "19dbm"
+        }
+      ]
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "0205_Custom"
+        }
+      ],
+      "name": "Сравнение данных с предыдущими",
+      "description": "Отправляет данные по пробуждению, сравнивая их с предыдущими, по порогам заданным в ПО (температура 0.25°C, влажность воздуха 0.5%)",
+      "type": "Boolean",
+      "value": false
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "F004_Custom"
+        }
+      ],
+      "name": "Инвертирование цвета e-paper дисплея",
+      "type": "Integer",
+      "value": 1,
+      "values": [
+        {
+          "value": 0,
+          "name": "Черное на белом"
+        },
+        {
+          "value": 1,
+          "name": "Белое на черном"
+        }
+      ]
+    },
+    {
+      "link": [
+        {
+          "endpoint": 1,
+          "cluster": "0001_PowerConfiguration",
+          "attribute": "F005_Custom"
+        }
+      ],
+      "name": "Режим обновления данных на e-paper дисплее",
+      "type": "Integer",
+      "value": 0,
+      "values": [
+        {
+          "value": 0,
+          "name": "Быстрый"
+        },
+        {
+          "value": 1,
+          "name": "Ультра Быстрый"
+        }
+      ]
+    }
+  ]
+}
