@@ -1,0 +1,161 @@
+{
+    "EFEKTA": [
+        {
+            "description": "Smart water/gas pressure monitor with e-ink display V2",
+            "modelNames": [
+                "EFEKTA_ePST_POW_V2_E_LR"
+            ],
+            "exposes": [
+                "pressure",
+                "bar",
+                "temperature",
+                "mainsVoltage",
+                "battery",
+                "pressureOffset",
+                "temperatureOffset",
+                "readInterval",
+                "transmitPower",
+                "comparePrevious",
+                "invertDisplay",
+                "fastMode"
+            ],
+            "options": {
+                "customAttributes_1": {
+                    "bar": {
+                        "type": "value",
+                        "clusterId": 1027,
+                        "attributeId": 0,
+                        "dataType": 41,
+                        "divider": 1000
+                    },
+                    "mainsVoltage": {
+                        "type": "value",
+                        "clusterId": 1,
+                        "attributeId": 0,
+                        "dataType": 33,
+                        "divider": 10
+                    },
+                    "pressureOffset": {
+                        "type": "value",
+                        "clusterId": 1027,
+                        "attributeId": 528,
+                        "dataType": 41,
+                        "action": true
+                    },
+                    "readInterval": {
+                        "type": "value",
+                        "clusterId": 1,
+                        "attributeId": 513,
+                        "dataType": 33,
+                        "action": true
+                    },
+                    "transmitPower": {
+                        "type": "enum",
+                        "clusterId": 1,
+                        "attributeId": 566,
+                        "dataType": 40,
+                        "action": true
+                    },
+                    "comparePrevious": {
+                        "type": "bool",
+                        "clusterId": 1,
+                        "attributeId": 517,
+                        "dataType": 16,
+                        "action": true
+                    },
+                    "invertDisplay": {
+                        "type": "enum",
+                        "clusterId": 1,
+                        "attributeId": 61444,
+                        "dataType": 32,
+                        "action": true
+                    },
+                    "fastMode": {
+                        "type": "enum",
+                        "clusterId": 1,
+                        "attributeId": 61445,
+                        "dataType": 32,
+                        "action": true
+                    }
+                },
+                "customAttributes_2": {
+                    "temperatureOffset": {
+                        "type": "value",
+                        "clusterId": 1026,
+                        "attributeId": 528,
+                        "dataType": 41,
+                        "divider": 10,
+                        "action": true
+                    }
+                },
+                "bar": {
+                    "type": "sensor",
+                    "unit": "bar"
+                },
+                "mainsVoltage": {
+                    "type": "sensor",
+                    "unit": "V."
+                },
+                "pressureOffset": {
+                    "min": -1000,
+                    "max": 1000,
+                    "unit": "hPa"
+                },
+                "temperatureOffset": {
+                    "min": -50,
+                    "max": 50,
+                    "step": 0.1,
+					"unit": "°C"
+                },
+                "readInterval": {
+                    "min": 5,
+                    "max": 360,
+                    "unit": "sec."
+                },
+                "comparePrevious": {
+                    "type": "toggle"
+                },
+                "transmitPower": {
+                    "type": "select",
+                    "enum": {
+                        "4": "4 dBm",
+                        "19": "19 dBm"
+                    }
+                },
+                "invertDisplay": {
+                    "type": "select",
+                    "enum": {
+                        "0": "BW",
+                        "1": "WB"
+                    }
+                },
+                "fastMode": {
+                    "type": "select",
+                    "enum": {
+                        "0": "Fast",
+                        "1": "Ultra Fast"
+                    }
+                }
+            }
+        },
+        {
+            "modelNames": [
+                "EFEKTA_ePST_POW_V2_E_LR"
+            ],
+            "properties": [
+                "batteryPercentage",
+                "pressure"
+            ],
+            "endpointId": 1
+        },
+        {
+            "modelNames": [
+                "EFEKTA_ePST_POW_V2_E_LR"
+            ],
+            "properties": [
+                "temperature"
+            ],
+            "endpointId": 2
+        }
+    ]
+}
