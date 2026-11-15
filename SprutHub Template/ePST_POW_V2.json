@@ -1,12 +1,15 @@
 {
   "name": "EFEKTA_ePST_POW V2",
   "manufacturer": "EfektaLab",
-  "model": "EFEKTA_ePST_POW_V2_E_LR",
+  "model": "(EFEKTA_ePST_POW_V2_E_LR|EFEKTA_ePST_POW_V2_R_LR|EFEKTA_ePST_POW_V2_E|EFEKTA_ePST_POW_V2_R)",
   "manufacturerIds": [
     "EfektaLab"
   ],
   "modelIds": [
-    "EFEKTA_ePST_POW_V2_E_LR"
+    "EFEKTA_ePST_POW_V2_E_LR",
+    "EFEKTA_ePST_POW_V2_R_LR",
+    "EFEKTA_ePST_POW_V2_E",
+    "EFEKTA_ePST_POW_V2_R"
   ],
   "catalogId": 0,
   "template": [
@@ -159,7 +162,7 @@
               "endpoint": 1,
               "cluster": "0403_PressureMeasurement",
               "attribute": "0000_MeasuredValue",
-              "inFunc": "value*0.001333"
+              "scale": 0.001
             }
           ]
         }
@@ -215,9 +218,21 @@
           "value": 5,
           "name": "0-5bar"
         },
+		{
+          "value": 6,
+          "name": "0-6bar"
+        },
+		{
+          "value": 8,
+          "name": "0-8bar"
+        },
         {
           "value": 10,
           "name": "0-10bar"
+        },
+		{
+          "value": 12,
+          "name": "0-12bar"
         }
       ]
     },
